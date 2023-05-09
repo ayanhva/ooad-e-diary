@@ -3,7 +3,7 @@ package ooad.project.ediary.mapper;
 import ooad.project.ediary.dao.entity.FormClassEntity;
 import ooad.project.ediary.dao.entity.SchoolEntity;
 import ooad.project.ediary.dao.entity.UserEntity;
-import ooad.project.ediary.model.dto.FormClassDto;
+import ooad.project.ediary.model.dto.FormClassRegistrationDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -21,5 +21,5 @@ public abstract class FormClassMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    public abstract FormClassEntity toFormClass(FormClassDto formClassDto, UserEntity formTutor, SchoolEntity school);
+    public abstract FormClassEntity toFormClass(FormClassRegistrationDto formClassDto, UserEntity formTutor, SchoolEntity school);
 }

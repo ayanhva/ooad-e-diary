@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormClassDto {
-    private Long id;
+public class FormClassRegistrationDto {
     private Long year;
     private String identifier;
+    private Long formTutor;
     private Long roomNumber;
 }
