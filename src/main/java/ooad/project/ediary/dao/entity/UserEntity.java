@@ -80,6 +80,11 @@ public class UserEntity {
     @JsonBackReference
     private SchoolEntity school;
 
+    @ManyToOne
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    @JsonBackReference
+    private SubjectEntity subject;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
