@@ -25,7 +25,7 @@ public class SubjectManagementController {
         managementService.registerSubject(subjectRegistrationDto);
     }
 
-    @GetMapping("/instructors")
+    @GetMapping
     public List<SubjectDto> getAllSubjects() {
         return managementService.getAllSubjects();
     }
