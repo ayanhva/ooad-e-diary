@@ -1,0 +1,109 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.12'
+	id 'java'
+	id "java-library"
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
+apply plugin: 'groovy'
+
+group = 'ooad.project'
+version = '0.0.1-SNAPSHOT'
+targetCompatibility = 11
+sourceCompatibility = 11
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+ext {
+	springCloudVersion = '2021.0.1'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+dependencies {
+	//web
+	implementation('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
+		exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
+		exclude group: 'com.fasterxml.jackson.core', module: 'jackson-annotations'
+		exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-core'
+	}
+
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+
+	implementation 'org.yaml:snakeyaml:1.31'
+
+	implementation('org.springframework:spring-beans:5.3.18')
+
+	//tomcat
+	implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.71'
+
+	implementation('javax.servlet:javax.servlet-api:4.0.1')
+
+	// logging
+	implementation('net.logstash.logback:logstash-logback-encoder:6.3') {
+		exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
+	}
+
+	//jackson
+	implementation('com.fasterxml.jackson.core:jackson-databind:2.13.4')
+	implementation('com.fasterxml.jackson:jackson-bom:2.13.2')
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
+
+	//lombok
+	compileOnly 'org.projectlombok:lombok:1.18.22'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+	//mapstruct
+	implementation('org.mapstruct:mapstruct-jdk8:1.3.0.Final')
+	annotationProcessor('org.mapstruct:mapstruct-jdk8:1.3.0.Final')
+	annotationProcessor('org.mapstruct:mapstruct-processor:1.3.0.Final')
+
+	// data
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa') {
+		exclude group: 'org.hibernate', module: 'hibernate-core'
+	}
+
+	implementation('com.vladmihalcea:hibernate-types-52:2.9.0')
+
+	implementation('org.hibernate:hibernate-core')
+
+	implementation('org.liquibase:liquibase-core') {
+		exclude group: 'org.apache.ant', module: 'ant'
+	}
+	runtimeOnly('org.postgresql:postgresql')
+
+	implementation('org.springframework.boot:spring-boot-starter-actuator:2.7.11')
+
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+}
+
+archivesBaseName = "${project.name}"
+
+jacoco {
+	toolVersion = '0.8.6'
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		html.enabled false
+	}
+}

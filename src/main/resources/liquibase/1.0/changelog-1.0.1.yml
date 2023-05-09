@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create users table
+      author: Ayan Hashimova
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: users
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar
+              - column:
+                  name: name
+                  type: varchar
+              - column:
+                  name: surname
+                  type: varchar
+              - column:
+                  name: address
+                  type: varchar
+              - column:
+                  name: phone_number
+                  type: varchar
+              - column:
+                  name: birth_date
+                  type: date
+              - column:
+                  name: email
+                  type: varchar
+              - column:
+                  name: password
+                  type: varchar
+              - column:
+                  name: type
+                  type: varchar
+              - column:
+                  name: school_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_user_to_school
+                    references: school(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about users
