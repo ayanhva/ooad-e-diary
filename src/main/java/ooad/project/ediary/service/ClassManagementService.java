@@ -40,6 +40,19 @@ public class ClassManagementService {
         System.out.println("ActionLog.registerFormClass end.");
     }
 
+    public void changeFormTutor(Long classId, Long instructorId) {
+        System.out.println("ActionLog.assignFormTutor start.");
+        UserEntity instructor = getUser(instructorId);
+        FormClassEntity formClass = getClass(classId);
+
+        formClass.setFormTutor(instructor);
+        instructor.setFormClass(formClass);
+
+        userRepository.save(instructor);
+        formClassRepository.save(formClass);
+        System.out.println("ActionLog.assignFormTutor end.");
+    }
+
     public List<FormClassDto> getAllClasses(Long userId) {
         System.out.println("ActionLog.getAllClasses start.");
 
@@ -62,15 +75,20 @@ public class ClassManagementService {
 
         UserEntity student = getUser(studentId);
 
-        FormClassEntity formClass = formClassRepository.findById(classId).orElseThrow(() -> {
-            throw new NotFoundException("EXCEPTION.E-DIARY.FORM-CLASS-NOT-FOUND");
-        });
+        FormClassEntity formClass = getClass(classId);
 
         student.setFormClass(formClass);
 
         userRepository.save(student);
 
         System.out.println("ActionLog.enrollStudentToClass end.");
+    }
+
+    private FormClassEntity getClass(Long classId) {
+        return formClassRepository.findById(classId).orElseThrow(() -> {
+            System.out.println("ActionLog.getClass error class-id: " + classId);
+            throw new NotFoundException("EXCEPTION.E-DIARY.FORM-CLASS-NOT-FOUND");
+        });
     }
 
     private UserEntity getUser(Long userId) {

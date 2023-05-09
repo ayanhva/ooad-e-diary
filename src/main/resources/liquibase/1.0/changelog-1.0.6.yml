@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create course table
+      author: Ayan Hashimova
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: course
+      changes:
+        - createTable:
+            tableName: course
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: crn
+                  type: varchar
+              - column:
+                  name: subject_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_subject_to_course
+                    references: subject(id)
+              - column:
+                  name: start_time
+                  type: date
+              - column:
+                  name: end_time
+                  type: date
+              - column:
+                  name: room_number
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about courses

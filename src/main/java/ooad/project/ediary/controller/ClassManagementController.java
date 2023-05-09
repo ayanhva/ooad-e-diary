@@ -31,6 +31,11 @@ public class ClassManagementController {
         classManagementService.registerFormClass(userId, formClassRegistrationDto);
     }
 
+    @PutMapping("{classId}/form-tutor/{instructorId}")
+    public void changeFormTutor(@PathVariable Long classId, @PathVariable Long instructorId) {
+        classManagementService.changeFormTutor(classId, instructorId);
+    }
+
     @GetMapping
     public List<FormClassDto> getAllClasses(@RequestHeader(USER_ID) Long userId) {
         return classManagementService.getAllClasses(userId);

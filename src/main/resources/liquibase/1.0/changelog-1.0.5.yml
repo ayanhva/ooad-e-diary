@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: Add columns to users table
+      author: Ayan Hashimova
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: subject_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_subject_to_users
+                    references: subject(id)
+              - column:
+                  name: related_persons
+                  type: varchar
+            tableName: users
