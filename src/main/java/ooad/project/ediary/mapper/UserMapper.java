@@ -2,7 +2,7 @@ package ooad.project.ediary.mapper;
 
 import ooad.project.ediary.dao.entity.SchoolEntity;
 import ooad.project.ediary.dao.entity.UserEntity;
-import ooad.project.ediary.model.dto.UserDto;
+import ooad.project.ediary.model.dto.UserRegistrationDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -22,5 +22,5 @@ public abstract class UserMapper {
     @Mapping(target = "password", source = "password")
     @Mapping(target = "type", source = "userDto.type")
     @Mapping(target = "school", source = "school")
-    public abstract UserEntity toUserEntity(UserDto userDto, String password, SchoolEntity school);
+    public abstract UserEntity toUserEntity(UserRegistrationDto userDto, String password, SchoolEntity school);
 }

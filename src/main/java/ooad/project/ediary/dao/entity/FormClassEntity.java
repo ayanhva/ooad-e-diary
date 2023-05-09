@@ -1,5 +1,6 @@
 package ooad.project.ediary.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -39,6 +41,11 @@ public class FormClassEntity {
 
     @Column(name = "room_number")
     private Long roomNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "school_id", referencedColumnName = "id")
+    @JsonBackReference
+    private SchoolEntity school;
 
     @Column(name = "timetable_id")
     private Long timetableId;

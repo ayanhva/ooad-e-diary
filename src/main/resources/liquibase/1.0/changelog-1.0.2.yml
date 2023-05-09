@@ -34,6 +34,12 @@ databaseChangeLog:
                   name: room_number
                   type: bigint
               - column:
+                  name: school_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_form_class_to_school
+                    references: school(id)
+              - column:
                   name: timetable_id
                   type: bigint
               - column:
