@@ -12,6 +12,6 @@ databaseChangeLog:
                     foreignKeyName: fk_subject_to_users
                     references: subject(id)
               - column:
-                  name: related_persons
-                  type: varchar
+                  name: related_users
+                  type: jsonb
             tableName: users

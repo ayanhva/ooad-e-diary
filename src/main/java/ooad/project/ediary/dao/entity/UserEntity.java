@@ -1,11 +1,14 @@
 package ooad.project.ediary.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ooad.project.ediary.model.enums.UserType;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
@@ -21,12 +24,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UserEntity {
 
     @Id
@@ -65,6 +70,10 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name = "form_class")
     private FormClassEntity formClass;
+
+    @Type(type = "jsonb")
+    @Column(name = "related_users", columnDefinition = "jsonb")
+    private Set<Long> relatedUserIds;
 
     @ManyToOne
     @JoinColumn(name = "school_id", referencedColumnName = "id")
