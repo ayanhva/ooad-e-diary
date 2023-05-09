@@ -1,5 +1,6 @@
 package ooad.project.ediary.controller;
 
+import ooad.project.ediary.model.dto.CourseRegistrationDto;
 import ooad.project.ediary.model.dto.SubjectDto;
 import ooad.project.ediary.model.dto.SubjectRegistrationDto;
 import ooad.project.ediary.model.dto.UserLightDto;
@@ -20,12 +21,17 @@ public class SubjectManagementController {
     }
 
     @PostMapping
-    public void registerUser(@RequestBody SubjectRegistrationDto subjectRegistrationDto) {
+    public void registerSubject(@RequestBody SubjectRegistrationDto subjectRegistrationDto) {
         managementService.registerSubject(subjectRegistrationDto);
     }
 
     @GetMapping("/instructors")
     public List<SubjectDto> getAllSubjects() {
         return managementService.getAllSubjects();
+    }
+
+    @PostMapping("/course")
+    public void registerCourse(@RequestBody CourseRegistrationDto courseRegistrationDto) {
+        managementService.registerCourse(courseRegistrationDto);
     }
 }

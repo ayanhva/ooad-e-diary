@@ -28,11 +28,14 @@ databaseChangeLog:
                     foreignKeyName: fk_subject_to_course
                     references: subject(id)
               - column:
+                  name: weekday
+                  type: varchar
+              - column:
                   name: start_time
-                  type: date
+                  type: time
               - column:
                   name: end_time
-                  type: date
+                  type: time
               - column:
                   name: room_number
                   type: bigint
