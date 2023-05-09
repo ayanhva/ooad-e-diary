@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/e-diary/user")
+@RequestMapping("/e-diary/users")
 public class UserManagementController {
     private final UserManagementService managementService;
 
