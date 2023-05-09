@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -60,6 +61,10 @@ public class UserEntity {
     @Column(name = "type")
     @Enumerated(value = EnumType.STRING)
     private UserType type;
+
+    @OneToOne
+    @JoinColumn(name = "form_class")
+    private FormClassEntity formClass;
 
     @ManyToOne
     @JoinColumn(name = "school_id", referencedColumnName = "id")

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: Add form_class column to users table
+      author: Ayan Hashimova
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: form_class
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_form_class_to_users
+                    references: form_class(id)
+            tableName: users

@@ -3,12 +3,10 @@ package ooad.project.ediary.service;
 import ooad.project.ediary.dao.entity.FormClassEntity;
 import ooad.project.ediary.dao.entity.UserEntity;
 import ooad.project.ediary.dao.repo.FormClassRepository;
-import ooad.project.ediary.dao.repo.SchoolRepository;
 import ooad.project.ediary.dao.repo.UserRepository;
 import ooad.project.ediary.mapper.FormClassMapper;
 import ooad.project.ediary.model.dto.FormClassDto;
 import ooad.project.ediary.model.dto.FormClassRegistrationDto;
-import ooad.project.ediary.model.dto.UserLightDto;
 import ooad.project.ediary.model.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +15,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClassManagementService {
-    private final SchoolRepository schoolRepository;
     private final FormClassRepository formClassRepository;
     private final UserRepository userRepository;
 
-    public ClassManagementService(SchoolRepository schoolRepository,
-                                  FormClassRepository formClassRepository,
+    public ClassManagementService(FormClassRepository formClassRepository,
                                   UserRepository userRepository) {
-        this.schoolRepository = schoolRepository;
         this.formClassRepository = formClassRepository;
         this.userRepository = userRepository;
     }
@@ -36,9 +31,7 @@ public class ClassManagementService {
 
         UserEntity formTutor = null;
         if (formClassRegistrationDto.getFormTutor() != null) {
-            formTutor = userRepository.findById(formClassRegistrationDto.getFormTutor()).orElseThrow(() -> {
-                throw new NotFoundException("EXCEPTION.E-DIARY.FORM-TUTOR-NOT-FOUND");
-            });
+            formTutor = getUser(formClassRegistrationDto.getFormTutor());
         }
 
         FormClassEntity formClass = FormClassMapper.INSTANCE.toFormClass(formClassRegistrationDto, formTutor, user.getSchool());
@@ -64,8 +57,25 @@ public class ClassManagementService {
         return formClassesDto;
     }
 
+    public void enrollStudentToClass(Long classId, Long studentId) {
+        System.out.println("ActionLog.enrollStudentToClass start.");
+
+        UserEntity student = getUser(studentId);
+
+        FormClassEntity formClass = formClassRepository.findById(classId).orElseThrow(() -> {
+            throw new NotFoundException("EXCEPTION.E-DIARY.FORM-CLASS-NOT-FOUND");
+        });
+
+        student.setFormClass(formClass);
+
+        userRepository.save(student);
+
+        System.out.println("ActionLog.enrollStudentToClass end.");
+    }
+
     private UserEntity getUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> {
+            System.out.println("ActionLog.getUser error user-id: " + userId);
             throw new NotFoundException("EXCEPTION.E-DIARY.USER-NOT-FOUND");
         });
     }
