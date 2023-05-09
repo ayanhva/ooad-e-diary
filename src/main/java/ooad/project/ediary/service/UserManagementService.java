@@ -11,7 +11,6 @@ import ooad.project.ediary.model.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 
 @Service

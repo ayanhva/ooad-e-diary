@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create form_class table
+      author: Ayan Hashimova
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: form_class
+      changes:
+        - createTable:
+            tableName: form_class
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: year
+                  type: bigint
+              - column:
+                  name: identifier
+                  type: varchar
+              - column:
+                  name: form_tutor
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_form_class_to_users
+                    references: users(id)
+              - column:
+                  name: room_number
+                  type: bigint
+              - column:
+                  name: timetable_id
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about form class
