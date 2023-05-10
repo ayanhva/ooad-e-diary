@@ -4,48 +4,47 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ooad.project.ediary.model.enums.GradeType;
+import ooad.project.ediary.model.enums.TaskType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "course")
-public class CourseEntity {
+@Table(name = "task")
+public class TaskEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "crn")
-    private String crn;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "weekday")
-    private String weekday;
+    @Column(name = "grade")
+    @Enumerated(value = EnumType.STRING)
+    private GradeType grade;
 
-    @Column(name = "start_time")
-    private LocalTime startTime;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "end_time")
-    private LocalTime endTime;
+    @Column(name = "type")
+    @Enumerated(value = EnumType.STRING)
+    private TaskType type;
 
-    @Column(name = "room_number")
-    private Long roomNumber;
-
-    @ManyToOne
-    @JoinColumn(name = "form_class_id", referencedColumnName = "id")
-    @JsonBackReference
-    private FormClassEntity formClass;
+    @CreationTimestamp
+    @Column(name = "deadline")
+    private LocalDateTime deadline;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     @JsonBackReference
-    private SubjectEntity subject;
+    private CourseEntity course;
 
     @CreationTimestamp
     @Column(name = "created_at")

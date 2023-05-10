@@ -35,23 +35,6 @@ public class SubjectManagementService {
         System.out.println("ActionLog.registerSubject end.");
     }
 
-    public void registerCourse(CourseRegistrationDto courseRegistrationDto) {
-        System.out.println("ActionLog.registerCourse start.");
-
-        SubjectEntity subjectEntity = getSubject(courseRegistrationDto.getSubjectId());
-
-        FormClassEntity formClass = formClassRepository.findById(
-                courseRegistrationDto.getFormClassId()).orElseThrow(() -> {
-            throw new NotFoundException("EXCEPTION.E-DIARY.FORM-CLASS-NOT-FOUND");
-        });
-
-        CourseEntity courseEntity = CourseMapper.INSTANCE.toCourseEntity(courseRegistrationDto, subjectEntity, formClass);
-
-        courseRepository.save(courseEntity);
-
-        System.out.println("ActionLog.registerCourse end.");
-    }
-
     public List<SubjectDto> getAllSubjects() {
         System.out.println("ActionLog.getAllSubjects start.");
 

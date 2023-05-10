@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create attendance table
+      author: Ayan Hashimova
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: attendance
+      changes:
+        - createTable:
+            tableName: attendance
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: mark
+                  type: varchar
+              - column:
+                  name: note
+                  type: varchar
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_course_to_attendance
+                    references: course(id)
+              - column:
+                  name: student_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_user_to_attendance
+                    references: users(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about attendance

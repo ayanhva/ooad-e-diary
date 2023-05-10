@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static ooad.project.ediary.model.constant.HeaderKeys.USER_ID;
 
 @RestController
 @RequestMapping("/e-diary/subjects")
@@ -29,10 +28,5 @@ public class SubjectManagementController {
     @GetMapping
     public List<SubjectDto> getAllSubjects() {
         return managementService.getAllSubjects();
-    }
-
-    @PostMapping("/course")
-    public void registerCourse(@RequestBody CourseRegistrationDto courseRegistrationDto) {
-        managementService.registerCourse(courseRegistrationDto);
     }
 }
