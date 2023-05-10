@@ -13,6 +13,7 @@ import static ooad.project.ediary.model.constant.HeaderKeys.USER_ID;
 
 @RestController
 @RequestMapping("/e-diary/subjects")
+@CrossOrigin(origins = "http://localhost:63342")
 public class SubjectManagementController {
     private final SubjectManagementService managementService;
 

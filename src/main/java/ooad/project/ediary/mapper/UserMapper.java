@@ -22,5 +22,6 @@ public abstract class UserMapper {
     @Mapping(target = "password", source = "password")
     @Mapping(target = "type", source = "userDto.type")
     @Mapping(target = "school", source = "school")
+    @Mapping(target = "id", ignore = true)
     public abstract UserEntity toUserEntity(UserRegistrationDto userDto, String password, SchoolEntity school);
 }
