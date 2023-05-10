@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: Add column to course table
+      author: Ayan Hashimova
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: school_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_school_to_course
+                    references: school(id)
+            tableName: course
+        - dropColumn:
+            columnName: grade
+            tableName: task

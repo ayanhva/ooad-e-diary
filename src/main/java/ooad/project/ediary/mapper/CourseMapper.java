@@ -2,6 +2,7 @@ package ooad.project.ediary.mapper;
 
 import ooad.project.ediary.dao.entity.CourseEntity;
 import ooad.project.ediary.dao.entity.FormClassEntity;
+import ooad.project.ediary.dao.entity.SchoolEntity;
 import ooad.project.ediary.dao.entity.SubjectEntity;
 import ooad.project.ediary.model.dto.CourseRegistrationDto;
 import org.mapstruct.Mapper;
@@ -20,10 +21,12 @@ public abstract class CourseMapper {
     @Mapping(target = "roomNumber", source = "courseRegistrationDto.roomNumber")
     @Mapping(target = "subject", source = "subject")
     @Mapping(target = "formClass", source = "formClass")
+    @Mapping(target = "school", source = "school")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     public abstract CourseEntity toCourseEntity(CourseRegistrationDto courseRegistrationDto,
                                                 SubjectEntity subject,
-                                                FormClassEntity formClass);
+                                                FormClassEntity formClass,
+                                                SchoolEntity school);
 }

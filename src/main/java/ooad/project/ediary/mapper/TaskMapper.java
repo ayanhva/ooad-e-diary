@@ -15,7 +15,6 @@ public abstract class TaskMapper {
     @Mapping(target = "name", source = "taskDto.name")
     @Mapping(target = "description", source = "taskDto.description")
     @Mapping(target = "type", source = "taskDto.type")
-    @Mapping(target = "grade", source = "taskDto.grade")
     @Mapping(target = "deadline", source = "taskDto.deadline")
     @Mapping(target = "course", source = "course")
     @Mapping(target = "id", ignore = true)

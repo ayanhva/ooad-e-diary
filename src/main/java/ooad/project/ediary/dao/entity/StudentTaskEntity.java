@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ooad.project.ediary.model.enums.GradeType;
-import ooad.project.ediary.model.enums.TaskType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,31 +15,26 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "task")
-public class TaskEntity {
+@Table(name = "studen_task")
+public class StudentTaskEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "type")
-    @Enumerated(value = EnumType.STRING)
-    private TaskType type;
-
-    @CreationTimestamp
-    @Column(name = "deadline")
-    private LocalDateTime deadline;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
+    private UserEntity student;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JoinColumn(name = "task_id", referencedColumnName = "id")
     @JsonBackReference
-    private CourseEntity course;
+    private CourseEntity task;
+
+    @Column(name = "grade")
+    @Enumerated(value = EnumType.STRING)
+    private GradeType grade;
 
     @CreationTimestamp
     @Column(name = "created_at")
