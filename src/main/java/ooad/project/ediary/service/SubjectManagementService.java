@@ -47,11 +47,6 @@ public class SubjectManagementService {
         System.out.println("ActionLog.registerCourse end.");
     }
 
-    private SubjectEntity getSubject(Long subjectId) {
-        return subjectRepository.findById(subjectId).orElseThrow(() -> {
-            throw new NotFoundException("EXCEPTION.E-DIARY.SUBJECT-NOT-FOUND");
-        });
-    }
     public List<SubjectDto> getAllSubjects() {
         System.out.println("ActionLog.getAllSubjects start.");
 
@@ -64,5 +59,11 @@ public class SubjectManagementService {
         System.out.println("ActionLog.getAllSubjects end.");
 
         return subjectDto;
+    }
+
+    private SubjectEntity getSubject(Long subjectId) {
+        return subjectRepository.findById(subjectId).orElseThrow(() -> {
+            throw new NotFoundException("EXCEPTION.E-DIARY.SUBJECT-NOT-FOUND");
+        });
     }
 }

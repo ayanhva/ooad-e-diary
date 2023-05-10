@@ -6,7 +6,6 @@ import ooad.project.ediary.model.enums.UserType;
 import ooad.project.ediary.service.UserManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +36,11 @@ public class UserManagementController {
     @GetMapping("/instructors")
     public List<UserLightDto> getAllInstructors(@RequestHeader(USER_ID) Long userId) {
         return managementService.getAllInstructors(userId);
+    }
+
+    @GetMapping("/students")
+    public List<UserLightDto> getAllStudents(@RequestHeader(USER_ID) Long userId) {
+        return managementService.getAllStudents(userId);
     }
 
     @GetMapping("/type")
