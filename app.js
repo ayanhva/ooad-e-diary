@@ -169,6 +169,9 @@ function submitRegisterCourse() {
       url: 'http://localhost:8444/e-diary/courses',
       type: 'POST',
       crossDomain: true,
+      headers: {
+        'USER-ID': 1,
+      }
       contentType: 'application/json',
       data: JSON.stringify({
         crn, weekday, startTime, endTime, roomNumber, subjectId
