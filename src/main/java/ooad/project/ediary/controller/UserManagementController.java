@@ -19,7 +19,7 @@ import static ooad.project.ediary.model.constant.HeaderKeys.USER_ID;
 
 @RestController
 @RequestMapping("/e-diary/users")
-@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin(origins = "http://localhost:63343")
 public class UserManagementController {
     private final UserManagementService managementService;
 

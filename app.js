@@ -4,7 +4,7 @@ $.ajax({
   type: 'GET',
   crossDomain: true,
   headers: {
-    'User-ID': 1,
+    'User-ID': 2,
   },
   success: function(data) {
     console.log('Success!');
@@ -48,7 +48,7 @@ async function fetchRequest(endpoint) {
     type: 'GET',
     crossDomain: true,
     headers: {
-        "USER-ID": 1,
+        "USER-ID": 2,
     },
     success: function(data) {
         return data
@@ -83,7 +83,7 @@ function submitRegisterUser() {
       type: 'POST',
       crossDomain: true,
       headers: {
-        'User-ID': 1,
+        'User-ID': 2,
       },
       contentType: 'application/json',
       data: JSON.stringify({
@@ -111,7 +111,9 @@ function registerSubject() {
 }
 
 function submitRegisterSubject() {
-    let subjectName = $('#subjectName').val();
+    let name = $('#subjectName').val();
+
+    console.log(name)
 
     $.ajax({
       url: 'http://localhost:8444/e-diary/subjects',
@@ -119,7 +121,7 @@ function submitRegisterSubject() {
       crossDomain: true,
       contentType: 'application/json',
       data: JSON.stringify({
-        subjectName
+        name
       }),
       success: function(data) {
         console.log('Success!');
@@ -170,8 +172,8 @@ function submitRegisterCourse() {
       type: 'POST',
       crossDomain: true,
       headers: {
-        'USER-ID': 1,
-      }
+        'USER-ID': 2,
+      },
       contentType: 'application/json',
       data: JSON.stringify({
         crn, weekday, startTime, endTime, roomNumber, subjectId
@@ -230,7 +232,7 @@ function submitRegisterFormClass() {
       type: 'POST',
       crossDomain: true,
       headers: {
-        'User-ID': 1,
+        'User-ID': 2,
       },
       contentType: 'application/json',
       data: JSON.stringify({
@@ -262,7 +264,7 @@ function populateFormClasses() {
     let res = fetchRequest('/classes')
         .then((data) => {
             populateSelect(
-            ".formClassList",
+            "#formClassList",
              "Select a class",
              "identifier",
               data
@@ -270,7 +272,6 @@ function populateFormClasses() {
         })
         .catch((e) => {
         });
-
 }
 
 function populateStudents() {
@@ -295,7 +296,6 @@ function populateSelect(id, label, key, items) {
       $.each(items, function(index, item) {
         $(id).append('<option value="' + item.id + '">' + item[key] + '</option>');
       });
-
 }
 
 function submitEnrolledStudent() {
@@ -307,7 +307,7 @@ function submitEnrolledStudent() {
       type: 'PUT',
       crossDomain: true,
       headers: {
-        'User-ID': 1,
+        'User-ID': 2,
       },
       contentType: 'application/json',
       data: JSON.stringify({

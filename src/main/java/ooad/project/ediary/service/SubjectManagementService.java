@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SubjectManagementService {
     private final SubjectRepository subjectRepository;
-    private final CourseRepository courseRepository;
-    private final FormClassRepository formClassRepository;
 
     public void registerSubject(SubjectRegistrationDto subjectRegistrationDto) {
         System.out.println("ActionLog.registerSubject start.");
