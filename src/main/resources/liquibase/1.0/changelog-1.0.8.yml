@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create task table
+      author: Ayan Hashimova
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: task
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+              - column:
+                  name: grade
+                  type: varchar
+              - column:
+                  name: description
+                  type: varchar
+              - column:
+                  name: type
+                  type: varchar
+              - column:
+                  name: deadline
+                  type: date
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_course_to_task
+                    references: course(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about tasks

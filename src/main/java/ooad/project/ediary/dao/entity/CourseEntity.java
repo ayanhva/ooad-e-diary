@@ -40,6 +40,11 @@ public class CourseEntity {
     private Long roomNumber;
 
     @ManyToOne
+    @JoinColumn(name = "form_class_id", referencedColumnName = "id")
+    @JsonBackReference
+    private FormClassEntity formClass;
+
+    @ManyToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     @JsonBackReference
     private SubjectEntity subject;

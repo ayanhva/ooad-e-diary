@@ -16,4 +16,5 @@ public class CourseRegistrationDto {
     private LocalTime endTime;
     private Long roomNumber;
     private Long subjectId;
+    private Long formClassId;
 }
