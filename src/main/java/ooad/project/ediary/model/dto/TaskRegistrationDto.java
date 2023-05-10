@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskRegistrationDto {
     private String name;
-    private GradeType grade;
     private String description;
     private TaskType type;
     private LocalDateTime deadline;

@@ -11,11 +11,9 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskDto {
+public class StudentTaskDto {
     private Long id;
-    private String name;
-    private String description;
-    private TaskType type;
-    private LocalDateTime deadline;
-    private Long courseId;
+    private GradeType grade;
+    private Long taskId;
+    private Long studentId;
 }

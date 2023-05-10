@@ -3,6 +3,7 @@ package ooad.project.ediary.controller;
 import lombok.AllArgsConstructor;
 import ooad.project.ediary.model.dto.AttendanceRecordDto;
 import ooad.project.ediary.model.dto.CourseRegistrationDto;
+import ooad.project.ediary.model.dto.StudentTaskRegistrationDto;
 import ooad.project.ediary.model.dto.TaskRegistrationDto;
 import ooad.project.ediary.service.CourseManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,11 @@ public class CourseManagementController {
     @PostMapping("/task")
     public void addTask(@RequestBody TaskRegistrationDto taskRegistrationDto) {
         service.addTask(taskRegistrationDto);
+    }
+
+    @PostMapping("/gradeTask")
+    public void gradeTask(@RequestBody StudentTaskRegistrationDto studentTaskRegistrationDto) {
+        service.gradeTask(studentTaskRegistrationDto);
     }
 
     @GetMapping
