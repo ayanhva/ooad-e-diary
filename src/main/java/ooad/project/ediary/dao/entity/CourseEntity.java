@@ -47,6 +47,11 @@ public class CourseEntity {
     @JsonBackReference
     private SubjectEntity subject;
 
+    @ManyToOne
+    @JoinColumn(name = "school_id", referencedColumnName = "id")
+    @JsonBackReference
+    private SchoolEntity school;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
