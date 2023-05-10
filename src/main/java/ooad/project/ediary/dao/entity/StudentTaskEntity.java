@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "studen_task")
+@Table(name = "student_task")
 public class StudentTaskEntity {
     @Id
     @Column(name = "id")
@@ -23,7 +23,7 @@ public class StudentTaskEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     @JsonBackReference
     private UserEntity student;
 

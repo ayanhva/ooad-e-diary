@@ -33,7 +33,6 @@ import java.util.Set;
 @Table(name = "users")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UserEntity {
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,6 +68,7 @@ public class UserEntity {
 
     @OneToOne
     @JoinColumn(name = "form_class")
+    @JsonBackReference
     private FormClassEntity formClass;
 
     @Type(type = "jsonb")

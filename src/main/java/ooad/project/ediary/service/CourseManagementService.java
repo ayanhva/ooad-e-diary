@@ -10,12 +10,9 @@ import ooad.project.ediary.model.dto.*;
 import ooad.project.ediary.mapper.TaskMapper;
 import ooad.project.ediary.model.dto.CourseRegistrationDto;
 import ooad.project.ediary.model.dto.TaskRegistrationDto;
-import ooad.project.ediary.model.dto.UserLightDto;
 import ooad.project.ediary.model.exception.NotFoundException;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -38,6 +39,7 @@ public class FormClassEntity {
 
     @OneToOne
     @JoinColumn(name = "form_tutor")
+    @ToString.Exclude
     private UserEntity formTutor;
 
     @Column(name = "room_number")
