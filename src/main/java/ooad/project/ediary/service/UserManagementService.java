@@ -50,6 +50,23 @@ public class UserManagementService {
         return instructorsDto;
     }
 
+    public List<UserLightDto> getAllStudents(Long userId) {
+        System.out.println("ActionLog.getAllInstructors start.");
+
+        UserEntity user = getUser(userId);
+
+        List<UserEntity> students = userRepository.findAllByTypeAndSchool(UserType.STUDENT, user.getSchool());
+
+        List<UserLightDto> studentsDto = students.stream()
+                .map(student -> new UserLightDto(student.getId(), student.getUsername(),
+                        student.getName(), student.getSurname(), student.getEmail()))
+                .collect(Collectors.toList());
+
+        System.out.println("ActionLog.getAllInstructors end.");
+
+        return studentsDto;
+    }
+
     public UserType getUserType(Long userId) {
         System.out.println("ActionLog.getUserType start.");
 
