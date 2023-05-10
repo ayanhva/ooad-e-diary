@@ -1,10 +1,12 @@
+let globalUserID = 2;
+
 // based on the type of the user, show the appropriate UI
 $.ajax({
   url: 'http://localhost:8444/e-diary/users/type',
   type: 'GET',
   crossDomain: true,
   headers: {
-    'User-ID': 2,
+    'User-ID': globalUserID,
   },
   success: function(data) {
     console.log('Success!');
@@ -84,7 +86,7 @@ function submitRegisterUser() {
       type: 'POST',
       crossDomain: true,
       headers: {
-        'User-ID': 2,
+        'User-ID': globalUserID,
       },
       contentType: 'application/json',
       data: JSON.stringify({
@@ -92,6 +94,7 @@ function submitRegisterUser() {
       }),
       success: function(data) {
         console.log('Success!');
+        alert('Success!');
         console.log(data);
       },
       error: function(error) {
@@ -126,6 +129,7 @@ function submitRegisterSubject() {
       }),
       success: function(data) {
         console.log('Success!');
+        alert('Success!');
         console.log(data);
       },
       error: function(error) {
@@ -174,7 +178,7 @@ function submitRegisterCourse() {
       type: 'POST',
       crossDomain: true,
       headers: {
-        'USER-ID': 2,
+        'User-ID': globalUserID,
       },
       contentType: 'application/json',
       data: JSON.stringify({
@@ -182,6 +186,7 @@ function submitRegisterCourse() {
       }),
       success: function(data) {
         console.log('Success!');
+        alert('Success!');
         console.log(data);
       },
       error: function(error) {
@@ -234,7 +239,7 @@ function submitRegisterFormClass() {
       type: 'POST',
       crossDomain: true,
       headers: {
-        'User-ID': 2,
+        'User-ID': globalUserID,
       },
       contentType: 'application/json',
       data: JSON.stringify({
@@ -242,6 +247,7 @@ function submitRegisterFormClass() {
       }),
       success: function(data) {
         console.log('Success!');
+        alert('Success!');
         console.log(data);
       },
       error: function(error) {
@@ -318,7 +324,7 @@ function submitEnrolledStudent() {
       type: 'PUT',
       crossDomain: true,
       headers: {
-        'User-ID': 2,
+        'User-ID': globalUserID,
       },
       contentType: 'application/json',
       data: JSON.stringify({
@@ -326,6 +332,7 @@ function submitEnrolledStudent() {
       }),
       success: function(data) {
         console.log('Success!');
+        alert('Success!');
         console.log(data);
       },
       error: function(error) {
