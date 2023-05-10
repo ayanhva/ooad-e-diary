@@ -3,6 +3,7 @@ package ooad.project.ediary.controller;
 import lombok.AllArgsConstructor;
 import ooad.project.ediary.model.dto.FormClassDto;
 import ooad.project.ediary.model.dto.FormClassRegistrationDto;
+import ooad.project.ediary.model.dto.TimetableCourseDto;
 import ooad.project.ediary.service.ClassManagementService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,22 +24,22 @@ public class ClassManagementController {
         classManagementService.registerFormClass(userId, formClassRegistrationDto);
     }
 
-    @PutMapping("{classId}/form-tutor/{instructorId}")
+    @PutMapping("/{classId}/form-tutor/{instructorId}")
     public void changeFormTutor(@PathVariable Long classId, @PathVariable Long instructorId) {
         classManagementService.changeFormTutor(classId, instructorId);
     }
 
-    @PutMapping("{classId}/room-number/{roomNumber}")
+    @PutMapping("/{classId}/room-number/{roomNumber}")
     public void changeRoomNumber(@PathVariable Long classId, @PathVariable Long roomNumber) {
         classManagementService.changeRoomNumber(classId, roomNumber);
     }
 
-    @DeleteMapping("{classId}/student/{studentId}")
+    @DeleteMapping("/{classId}/student/{studentId}")
     public void removeStudentFromClass(@PathVariable Long classId, @PathVariable Long studentId) {
         classManagementService.removeStudentFromClass(classId, studentId);
     }
 
-    @DeleteMapping("{classId}/student/{studentId}")
+    @PostMapping("/{classId}/student/{studentId}")
     public void addStudentToClass(@PathVariable Long classId, @PathVariable Long studentId) {
         classManagementService.addStudentToClass(classId, studentId);
     }
@@ -48,9 +49,14 @@ public class ClassManagementController {
         return classManagementService.getAllClasses(userId);
     }
 
-    @PutMapping("{classId}/student/{studentId}")
+    @PutMapping("/{classId}/student/{studentId}")
     public void enrollStudentToClass(@PathVariable Long classId,
                                      @PathVariable Long studentId) {
         classManagementService.enrollStudentToClass(classId, studentId);
+    }
+
+    @GetMapping("/{classId}/timetable")
+    public List<TimetableCourseDto> getTimetable(@PathVariable Long classId) {
+        return classManagementService.getTimetable(classId);
     }
 }

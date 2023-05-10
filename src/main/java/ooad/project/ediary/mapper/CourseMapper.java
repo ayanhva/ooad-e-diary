@@ -5,6 +5,7 @@ import ooad.project.ediary.dao.entity.FormClassEntity;
 import ooad.project.ediary.dao.entity.SchoolEntity;
 import ooad.project.ediary.dao.entity.SubjectEntity;
 import ooad.project.ediary.model.dto.CourseRegistrationDto;
+import ooad.project.ediary.model.dto.TimetableCourseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -29,4 +30,17 @@ public abstract class CourseMapper {
                                                 SubjectEntity subject,
                                                 FormClassEntity formClass,
                                                 SchoolEntity school);
+
+
+    @Mapping(target = "id", source = "course.id")
+    @Mapping(target = "crn", source = "course.crn")
+    @Mapping(target = "weekday", source = "course.weekday")
+    @Mapping(target = "startTime", source = "course.startTime")
+    @Mapping(target = "endTime", source = "course.endTime")
+    @Mapping(target = "roomNumber", source = "course.roomNumber")
+    @Mapping(target = "subjectName", source = "subjectName")
+    @Mapping(target = "formClassYearAndIdentifier", source = "formClassYearAndIdentifier")
+    public abstract TimetableCourseDto toTimetableCourseDto(CourseEntity course,
+                                                            String subjectName,
+                                                            String formClassYearAndIdentifier);
 }

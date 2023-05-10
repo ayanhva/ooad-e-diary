@@ -1,28 +1,30 @@
 package ooad.project.ediary.service;
 
+import lombok.AllArgsConstructor;
+import ooad.project.ediary.dao.entity.CourseEntity;
 import ooad.project.ediary.dao.entity.FormClassEntity;
 import ooad.project.ediary.dao.entity.UserEntity;
+import ooad.project.ediary.dao.repo.CourseRepository;
 import ooad.project.ediary.dao.repo.FormClassRepository;
 import ooad.project.ediary.dao.repo.UserRepository;
+import ooad.project.ediary.mapper.CourseMapper;
 import ooad.project.ediary.mapper.FormClassMapper;
 import ooad.project.ediary.model.dto.FormClassDto;
 import ooad.project.ediary.model.dto.FormClassRegistrationDto;
+import ooad.project.ediary.model.dto.TimetableCourseDto;
 import ooad.project.ediary.model.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ClassManagementService {
     private final FormClassRepository formClassRepository;
     private final UserRepository userRepository;
-
-    public ClassManagementService(FormClassRepository formClassRepository,
-                                  UserRepository userRepository) {
-        this.formClassRepository = formClassRepository;
-        this.userRepository = userRepository;
-    }
+    private final CourseRepository courseRepository;
 
     public void registerFormClass(Long userId, FormClassRegistrationDto formClassRegistrationDto) {
         System.out.println("ActionLog.registerFormClass start.");
@@ -114,6 +116,25 @@ public class ClassManagementService {
         userRepository.save(student);
 
         System.out.println("ActionLog.enrollStudentToClass end.");
+    }
+
+    public List<TimetableCourseDto> getTimetable(Long classId) {
+        System.out.println("ActionLog.getTimetable start.");
+
+        FormClassEntity formClass = getClass(classId);
+        List<CourseEntity> courses = courseRepository.findAllByFormClass(formClass);
+
+        List<TimetableCourseDto> timetableCourseDtos = new ArrayList<>();
+
+        courses.forEach(course -> {
+            String subjectName = course.getSubject().getName();
+            String yearAndIdentifier = course.getFormClass().getYear() + course.getFormClass().getIdentifier();
+            timetableCourseDtos.add(CourseMapper.INSTANCE.toTimetableCourseDto(course, subjectName, yearAndIdentifier));
+        });
+
+        System.out.println("ActionLog.getTimetable end.");
+
+        return timetableCourseDtos;
     }
 
     private FormClassEntity getClass(Long classId) {
