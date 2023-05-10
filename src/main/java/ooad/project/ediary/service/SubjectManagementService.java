@@ -1,8 +1,11 @@
 package ooad.project.ediary.service;
 
+import lombok.AllArgsConstructor;
 import ooad.project.ediary.dao.entity.CourseEntity;
+import ooad.project.ediary.dao.entity.FormClassEntity;
 import ooad.project.ediary.dao.entity.SubjectEntity;
 import ooad.project.ediary.dao.repo.CourseRepository;
+import ooad.project.ediary.dao.repo.FormClassRepository;
 import ooad.project.ediary.dao.repo.SubjectRepository;
 import ooad.project.ediary.mapper.CourseMapper;
 import ooad.project.ediary.mapper.SubjectMapper;
@@ -16,14 +19,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class SubjectManagementService {
     private final SubjectRepository subjectRepository;
     private final CourseRepository courseRepository;
-
-    public SubjectManagementService(SubjectRepository subjectRepository, CourseRepository courseRepository) {
-        this.subjectRepository = subjectRepository;
-        this.courseRepository = courseRepository;
-    }
+    private final FormClassRepository formClassRepository;
 
     public void registerSubject(SubjectRegistrationDto subjectRegistrationDto) {
         System.out.println("ActionLog.registerSubject start.");
@@ -40,7 +40,12 @@ public class SubjectManagementService {
 
         SubjectEntity subjectEntity = getSubject(courseRegistrationDto.getSubjectId());
 
-        CourseEntity courseEntity = CourseMapper.INSTANCE.toCourseEntity(courseRegistrationDto, subjectEntity);
+        FormClassEntity formClass = formClassRepository.findById(
+                courseRegistrationDto.getFormClassId()).orElseThrow(() -> {
+            throw new NotFoundException("EXCEPTION.E-DIARY.FORM-CLASS-NOT-FOUND");
+        });
+
+        CourseEntity courseEntity = CourseMapper.INSTANCE.toCourseEntity(courseRegistrationDto, subjectEntity, formClass);
 
         courseRepository.save(courseEntity);
 
