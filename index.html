@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <title>UI</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div id="admin-ui" class="flex flex-col items-center justify-center h-[100vh]">
+            <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-80 text-center" onclick="registerUser()" id="registerUserBtn">Register a user</button>
+            <div id="registerUser" class="w-1/3">
+                <div class="flex flex-col items-center justify-center">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="username" id="username">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="name" id="name">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="surname" id="surname">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="address" id="address">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="phone number" id="phoneNumber">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="birth date" id="birthDate">
+                    <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="type" id="type">
+                    <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-full text-center" onclick="submitRegisterUser()">Submit</button>
+                </div>
+            </div>
+            <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-80 text-center" onclick="registerSubject()" id="registerSubjectBtn">Register a subject</button>
+            <div id="registerSubject" class="w-1/3">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="name" id="subjectName">
+                <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-full text-center" onclick="submitRegisterSubject()">Submit</button>
+            </div>
+            <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-80 text-center" onclick="registerCourse()" id="registerCourseBtn">Register a course</button>
+            <div id="registerCourse" class="w-1/3">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="crn" id="crn">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="weekday" id="weekday">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="start time" id="startTime">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="end time" id="endTime">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="room number" id="roomNumber">
+                <select id="subjectId" class="w-full text-xs border border-gray-200 p-3 mt-1 rounded-md h-10">
+                </select>
+                <select class="formClassList w-full text-xs border border-gray-200 p-3 mt-1 rounded-md h-10">
+                </select>
+                <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-40 text-center w-full" onclick="submitRegisterCourse()">Submit</button>
+            </div>
+            <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-80 text-center" onclick="registerFormClass()" id="registerFormClassBtn">Register a form class</button>
+            <div id="registerFormClass" class="w-1/3">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="year" id="year">
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="identifier" id="identifier">
+                <select id="formTutor" class="w-full text-xs border border-gray-200 p-3 mt-1 rounded-md h-10">
+                </select>
+                <input class="w-full text-xs border border-gray-200 p-4 mt-1 rounded-md h-10" placeholder="room number" id="roomNumber_FormClass">
+                <br>
+                <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-full text-center" onclick="submitRegisterFormClass()">Submit</button>
+            </div>
+            <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-80 text-center" onclick="enrollStudent()" id="enrollStudentBtn">Enroll a student to a class</button>
+            <div id="enrollStudent" class="w-1/3">
+                <select class="formClassList w-full text-xs border border-gray-200 p-3 mt-1 rounded-md h-10">
+                </select>
+                <select id="studentsList" class="w-full text-xs border border-gray-200 p-3 mt-1 rounded-md h-10">
+                </select>
+                <button class="border border-gray-200 bg-gray-100 p-2 text-xs rounded-md my-1 w-full text-center" onclick="submitEnrolledStudent()">Submit</button>
+            </div>
+        </div>
+        <div id="student-ui"></div>
+        <div id="parent-ui"></div>
+        <div id="instructor-ui"></div>
+        <script src="./app.js"></script>
+    </body>
+</html>
