@@ -1,5 +1,6 @@
 package ooad.project.ediary.controller;
 
+import lombok.AllArgsConstructor;
 import ooad.project.ediary.model.dto.FormClassDto;
 import ooad.project.ediary.model.dto.FormClassRegistrationDto;
 import ooad.project.ediary.service.ClassManagementService;
@@ -18,12 +19,9 @@ import static ooad.project.ediary.model.constant.HeaderKeys.USER_ID;
 
 @RestController
 @RequestMapping("/e-diary/classes")
+@AllArgsConstructor
 public class ClassManagementController {
     private final ClassManagementService classManagementService;
-
-    public ClassManagementController(ClassManagementService classManagementService) {
-        this.classManagementService = classManagementService;
-    }
 
     @PostMapping
     public void registerFormClass(@RequestHeader(USER_ID) Long userId,

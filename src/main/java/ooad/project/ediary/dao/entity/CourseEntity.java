@@ -16,8 +16,6 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "course")
-
-
 public class CourseEntity {
     @Id
     @Column(name = "id")
