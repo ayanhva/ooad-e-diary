@@ -9,5 +9,8 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    List<UserEntity> findAllByTypeAndSchool(UserType userType, SchoolEntity scool);
+    List<UserEntity> findAllByTypeAndSchool(UserType userType, SchoolEntity school);
+
+
+    List<UserEntity> findAllBySchoolAndTypeNot(SchoolEntity school, UserType userType);
 }

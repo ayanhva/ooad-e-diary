@@ -53,6 +53,38 @@ public class ClassManagementService {
         System.out.println("ActionLog.assignFormTutor end.");
     }
 
+    public void changeRoomNumber(Long classId, Long roomNumber) {
+        System.out.println("ActionLog.changeRoomNumber start.");
+
+        FormClassEntity formClass = getClass(classId);
+        formClass.setRoomNumber(roomNumber);
+        formClassRepository.save(formClass);
+
+        System.out.println("ActionLog.changeRoomNumber end.");
+    }
+
+    public void addStudentToClass(Long classId, Long studentId) {
+        System.out.println("ActionLog.addStudentToClass start.");
+
+        UserEntity student = getUser(studentId);
+        FormClassEntity formClass = getClass(classId);
+
+        student.setFormClass(formClass);
+        userRepository.save(student);
+
+        System.out.println("ActionLog.addStudentToClass end.");
+    }
+
+    public void removeStudentFromClass(Long classId, Long studentId) {
+        System.out.println("ActionLog.removeStudentFromClass start.");
+
+        UserEntity student = getUser(studentId);
+        student.setFormClass(null);
+        userRepository.save(student);
+
+        System.out.println("ActionLog.removeStudentFromClass end.");
+    }
+
     public List<FormClassDto> getAllClasses(Long userId) {
         System.out.println("ActionLog.getAllClasses start.");
 

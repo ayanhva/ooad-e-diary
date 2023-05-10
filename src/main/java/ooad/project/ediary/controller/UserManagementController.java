@@ -33,6 +33,16 @@ public class UserManagementController {
         managementService.registerUser(userId, userRegistrationDto);
     }
 
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        managementService.deleteUser(userId);
+    }
+
+    @GetMapping
+    public List<UserLightDto> getAllUsers(@RequestHeader(USER_ID) Long userId) {
+        return managementService.getAllUsers(userId);
+    }
+
     @GetMapping("/instructors")
     public List<UserLightDto> getAllInstructors(@RequestHeader(USER_ID) Long userId) {
         return managementService.getAllInstructors(userId);

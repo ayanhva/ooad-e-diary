@@ -67,6 +67,31 @@ public class UserManagementService {
         return studentsDto;
     }
 
+    public void deleteUser(Long userId) {
+        System.out.println("ActionLog.deleteUser start.");
+
+        UserEntity user = getUser(userId);
+        userRepository.delete(user);
+
+        System.out.println("ActionLog.deleteUser end.");
+    }
+
+    public List<UserLightDto> getAllUsers(Long userId) {
+        System.out.println("ActionLog.getAllUsers start.");
+
+        UserEntity user = getUser(userId);
+        List<UserEntity> users = userRepository.findAllBySchoolAndTypeNot(user.getSchool(), UserType.ADMIN);
+
+        List<UserLightDto> usersDto = users.stream()
+                .map(u -> new UserLightDto(u.getId(), u.getUsername(),
+                        u.getName(), u.getSurname(), u.getEmail()))
+                .collect(Collectors.toList());
+
+        System.out.println("ActionLog.getAllUsers end.");
+
+        return usersDto;
+    }
+
     public UserType getUserType(Long userId) {
         System.out.println("ActionLog.getUserType start.");
 
