@@ -6,12 +6,7 @@ import ooad.project.ediary.model.dto.CourseRegistrationDto;
 import ooad.project.ediary.model.dto.StudentTaskRegistrationDto;
 import ooad.project.ediary.model.dto.TaskRegistrationDto;
 import ooad.project.ediary.service.CourseManagementService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +17,7 @@ import static ooad.project.ediary.model.constant.HeaderKeys.USER_ID;
 @RestController
 @RequestMapping("/e-diary/courses")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:63343")
 public class CourseManagementController {
 
     private final CourseManagementService service;

@@ -74,6 +74,7 @@ function submitRegisterUser() {
     let name = $('#name').val();
     let surname = $('#surname').val();
     let address = $('#address').val();
+    let email = $('#email').val();
     let phoneNumber = $('#phoneNumber').val();
     let birthDate = $('#birthDate').val();
     let type = $('#type').val();
@@ -87,7 +88,7 @@ function submitRegisterUser() {
       },
       contentType: 'application/json',
       data: JSON.stringify({
-        username, name, surname, address, phoneNumber, birthDate, type
+        username, name, surname, address, email, phoneNumber, birthDate, type
       }),
       success: function(data) {
         console.log('Success!');
@@ -147,7 +148,7 @@ function registerCourse() {
 function populateSubjects() {
     let res = fetchRequest('/subjects')
         .then((data) => {
-            populateSelect(
+            populateSelectById(
             "#subjectId",
              "Select a subject",
              "name",
@@ -166,6 +167,7 @@ function submitRegisterCourse() {
     let endTime = $('#endTime').val();
     let roomNumber = $('#roomNumber').val();
     let subjectId = $('#subjectId').val();
+    let formClassId = parseInt($('#registerCourseFormClassList').val());
 
     $.ajax({
       url: 'http://localhost:8444/e-diary/courses',
@@ -176,7 +178,7 @@ function submitRegisterCourse() {
       },
       contentType: 'application/json',
       data: JSON.stringify({
-        crn, weekday, startTime, endTime, roomNumber, subjectId
+        crn, weekday, startTime, endTime, roomNumber, subjectId, formClassId
       }),
       success: function(data) {
         console.log('Success!');
@@ -202,10 +204,10 @@ function registerFormClass() {
 function populateInstructors() {
     let res = fetchRequest('/users/instructors')
         .then((data) => {
-            populateSelect(
+            populateSelectById(
             "#formTutor",
              "Select an instructor",
-             "id",
+             "email",
               data
             )
         })
@@ -225,7 +227,7 @@ function submitRegisterFormClass() {
     let year = $('#year').val();
     let identifier = $('#identifier').val();
     let formTutor = $('#formTutor').val();
-    let roomNumber_FormClass = $('#roomNumber_FormClass').val();
+    let roomNumber = parseInt($('#roomNumber_FormClass').val());
 
     $.ajax({
       url: 'http://localhost:8444/e-diary/classes',
@@ -236,7 +238,7 @@ function submitRegisterFormClass() {
       },
       contentType: 'application/json',
       data: JSON.stringify({
-        year, identifier, formTutor, roomNumber_FormClass
+        year, identifier, formTutor, roomNumber
       }),
       success: function(data) {
         console.log('Success!');
@@ -263,8 +265,8 @@ function enrollStudent() {
 function populateFormClasses() {
     let res = fetchRequest('/classes')
         .then((data) => {
-            populateSelect(
-            "#formClassList",
+            populateSelectsByClassName(
+            "formClassList",
              "Select a class",
              "identifier",
               data
@@ -277,7 +279,7 @@ function populateFormClasses() {
 function populateStudents() {
     let res = fetchRequest('/users/students')
         .then((data) => {
-            populateSelect(
+            populateSelectById(
             "#studentsList",
              "Choose a student",
              "username",
@@ -289,17 +291,26 @@ function populateStudents() {
 
 }
 
-function populateSelect(id, label, key, items) {
+function populateSelectById(id, label, key, items) {
       $(id).empty();
       $(id).append(`<option value="">${label}</option>`);
-      $(id).append('<option value="-1">null</option>');
       $.each(items, function(index, item) {
         $(id).append('<option value="' + item.id + '">' + item[key] + '</option>');
       });
 }
 
+
+function populateSelectsByClassName(className, label, key, items) {
+    const elements = document.getElementsByClassName("formClassList");
+    for (let i = 0; i < elements.length; i++) {
+        populateSelectById("#" + elements[i].id, label, key, items);
+    }
+}
+
+
+
 function submitEnrolledStudent() {
-    let formClass = $('.formClassList').val();
+    let formClass = $('#enrollStudentFormClassList').val();
     let student = $('#studentsList').val();
 
     $.ajax({
