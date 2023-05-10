@@ -18,5 +18,6 @@ public abstract class CourseMapper {
     @Mapping(target = "endTime", source = "courseRegistrationDto.endTime")
     @Mapping(target = "roomNumber", source = "courseRegistrationDto.roomNumber")
     @Mapping(target = "subject", source = "subject")
+    @Mapping(target = "formClass", source = "courseRegistrationDto.formClass")
     public abstract CourseEntity toCourseEntity(CourseRegistrationDto courseRegistrationDto, SubjectEntity subject);
 }

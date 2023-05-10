@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: Add column to course table
+      author: Ayan Hashimova
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: form_class_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_form_class_to_course
+                    references: form_class(id)
+            tableName: course
