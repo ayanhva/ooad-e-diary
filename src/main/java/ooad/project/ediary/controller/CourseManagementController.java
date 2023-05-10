@@ -27,8 +27,9 @@ public class CourseManagementController {
     private final CourseManagementService service;
 
     @PostMapping
-    public void registerCourse(@RequestBody CourseRegistrationDto courseRegistrationDto) {
-        service.registerCourse(courseRegistrationDto);
+    public void registerCourse(@RequestHeader(USER_ID) Long userId,
+                               @RequestBody CourseRegistrationDto courseRegistrationDto) {
+        service.registerCourse(userId, courseRegistrationDto);
     }
 
     @PostMapping("/task")

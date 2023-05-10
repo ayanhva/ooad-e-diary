@@ -8,6 +8,9 @@ import ooad.project.ediary.mapper.CourseMapper;
 import ooad.project.ediary.mapper.StudentTaskMapper;
 import ooad.project.ediary.model.dto.*;
 import ooad.project.ediary.mapper.TaskMapper;
+import ooad.project.ediary.model.dto.CourseRegistrationDto;
+import ooad.project.ediary.model.dto.TaskRegistrationDto;
+import ooad.project.ediary.model.dto.UserLightDto;
 import ooad.project.ediary.model.exception.NotFoundException;
 import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,21 +31,24 @@ public class CourseManagementService {
     private final AttendanceRepository attendanceRepository;
     private final StudentTaskRepository studentTaskRepository;
 
-    public void registerCourse(CourseRegistrationDto courseRegistrationDto) {
+    public void registerCourse(Long userId, CourseRegistrationDto courseRegistrationDto) {
         System.out.println("ActionLog.registerCourse start.");
+
+        UserEntity user = getUser(userId);
 
         SubjectEntity subjectEntity = getSubject(courseRegistrationDto.getSubjectId());
 
         FormClassEntity formClass = null;
 
-        if (courseRegistrationDto.getFormClassId() != null){
+        if (courseRegistrationDto.getFormClassId() != null) {
             formClass = formClassRepository.findById(
                     courseRegistrationDto.getFormClassId()).orElseThrow(() -> {
                 throw new NotFoundException("EXCEPTION.E-DIARY.FORM-CLASS-NOT-FOUND");
             });
         }
 
-        CourseEntity courseEntity = CourseMapper.INSTANCE.toCourseEntity(courseRegistrationDto, subjectEntity, formClass);
+        CourseEntity courseEntity = CourseMapper.INSTANCE
+                .toCourseEntity(courseRegistrationDto, subjectEntity, formClass, user.getSchool());
 
         courseRepository.save(courseEntity);
 
@@ -54,10 +61,16 @@ public class CourseManagementService {
         UserEntity user = getUser(userId);
         SubjectEntity subject = getSubject(subjectId);
 
+        List<CourseEntity> courseEntities = courseRepository.findAllBySubjectAndSchool(subject, user.getSchool());
+
+        List<CourseLightDto> coursesDto = courseEntities.stream()
+                .map(course -> new CourseLightDto(course.getId(), course.getCrn(), course.getWeekday(),
+                        course.getStartTime(), course.getEndTime(), course.getRoomNumber()))
+                .collect(Collectors.toList());
 
         System.out.println("ActionLog.getAllCourses end.");
 
-        return List.of(new CourseLightDto(1L, "", "", LocalTime.now(), LocalTime.now(), 2L));
+        return coursesDto;
     }
 
     public void recordAttendance(Long courseId, List<AttendanceRecordDto> attendanceRecords) {

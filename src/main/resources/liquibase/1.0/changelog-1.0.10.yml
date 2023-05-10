@@ -10,7 +10,7 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     foreignKeyName: fk_school_to_course
-                    references: form_class(id)
+                    references: school(id)
             tableName: course
         - dropColumn:
             columnName: grade
